@@ -120,27 +120,29 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 const contactForm = document.getElementById('contactForm');
 
 contactForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-
+    // أولاً نخلي الفورم يرسل للـ Netlify
+    // بدون preventDefault
+    // لذلك نستخدم setTimeout لفتح واتساب بعد الإرسال
     const formData = new FormData(contactForm);
     const name = formData.get('name');
     const email = formData.get('email');
     const phone = formData.get('phone');
     const message = formData.get('message');
 
-    // رقمك على واتساب (بدّل الرقم هنا بالرقم الصحيح)
-    const whatsappNumber = '+201019747118'; // مثال: +20XXXXXXXXXX
+    // رقم واتساب
+    const whatsappNumber = '201234567890';
     const text = `Name: ${name}%0AEmail: ${email}%0APhone: ${phone}%0AMessage: ${message}`;
     const whatsappURL = `https://wa.me/${whatsappNumber}?text=${text}`;
 
-    // فتح واتساب في تبويب جديد
-    window.open(whatsappURL, '_blank');
+    // نفتح واتساب بعد قليل عشان الفورم تتبعت للـ Netlify
+    setTimeout(() => {
+        window.open(whatsappURL, '_blank');
+    }, 500); // نصف ثانية تأخير
 
-    // إعادة ضبط الفورم
-    contactForm.reset();
-
-    // Optional: تنبيه للمستخدم
-    alert('Your message is ready on WhatsApp!');
+    // Optional: alert
+    setTimeout(() => {
+        alert('Your message has been submitted and is ready on WhatsApp!');
+    }, 600);
 });
 
 // ===================================
