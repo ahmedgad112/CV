@@ -121,22 +121,18 @@ const contactForm = document.getElementById('contactForm');
 
 contactForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    
-    // Get form data
+
     const formData = new FormData(contactForm);
-    const name = formData.get('name');
-    const email = formData.get('email');
-    const message = formData.get('message');
-    
-    // Simple validation
-    if (name && email && message) {
-        // Here you would typically send the data to a server
-        // For now, we'll just show a success message
+
+    fetch('/', {
+        method: 'POST',
+        body: formData
+    })
+    .then(() => {
         alert('Thank you for your message! I will get back to you soon.');
         contactForm.reset();
-    } else {
-        alert('Please fill in all fields.');
-    }
+    })
+    .catch(err => alert('Error submitting the form: ' + err));
 });
 
 // ===================================
