@@ -436,18 +436,22 @@
                         </div>
                     </div>
                 </div>
-                <form class="contact-form" id="contactForm" method="POST" name="Let's work together" data-netlify="true">
+                <form class="contact-form" id="contactForm" method="POST" name="contact" data-netlify="true">
+
+                    <input type="hidden" name="form-name" value="contact">
+
                     <div class="form-group">
-                        <input name="name" type="text" id="name" name="name" required>
+                        <input type="text" id="name" name="name" required>
                         <label for="name">Your Name</label>
                     </div>
+
                     <div class="form-group">
-                        <input name="email" type="email" id="email" name="email" required>
+                        <input type="email" id="email" name="email" required>
                         <label for="email">Your Email</label>
                     </div>
 
                     <div class="form-group">
-                        <input name="phone" type="tel" id="phone" name="phone" required>
+                        <input type="tel" id="phone" name="phone" required>
                         <label for="phone">Phone Number</label>
                     </div>
 
@@ -455,10 +459,12 @@
                         <textarea id="message" name="message" rows="5" required></textarea>
                         <label for="message">Your Message</label>
                     </div>
+
                     <button type="submit" class="btn btn-primary btn-submit">
                         <span>Send Message</span>
                         <i class="fas fa-paper-plane"></i>
                     </button>
+
                 </form>
             </div>
         </div>
