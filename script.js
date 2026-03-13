@@ -120,29 +120,19 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 const contactForm = document.getElementById('contactForm');
 
 contactForm.addEventListener('submit', (e) => {
-    // أولاً نخلي الفورم يرسل للـ Netlify
-    // بدون preventDefault
-    // لذلك نستخدم setTimeout لفتح واتساب بعد الإرسال
+    e.preventDefault();
+
     const formData = new FormData(contactForm);
-    const name = formData.get('name');
-    const email = formData.get('email');
-    const phone = formData.get('phone');
-    const message = formData.get('message');
 
-    // رقم واتساب
-    const whatsappNumber = '201234567890';
-    const text = `Name: ${name}%0AEmail: ${email}%0APhone: ${phone}%0AMessage: ${message}`;
-    const whatsappURL = `https://wa.me/${whatsappNumber}?text=${text}`;
-
-    // نفتح واتساب بعد قليل عشان الفورم تتبعت للـ Netlify
-    setTimeout(() => {
-        window.open(whatsappURL, '_blank');
-    }, 500); // نصف ثانية تأخير
-
-    // Optional: alert
-    setTimeout(() => {
-        alert('Your message has been submitted and is ready on WhatsApp!');
-    }, 600);
+    fetch('/', {
+        method: 'POST',
+        body: formData
+    })
+    .then(() => {
+        alert('Thank you for your message! I will get back to you soon.');
+        contactForm.reset();
+    })
+    .catch(err => alert('Error submitting the form: ' + err));
 });
 
 // ===================================
