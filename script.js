@@ -123,16 +123,24 @@ contactForm.addEventListener('submit', (e) => {
     e.preventDefault();
 
     const formData = new FormData(contactForm);
+    const name = formData.get('name');
+    const email = formData.get('email');
+    const phone = formData.get('phone');
+    const message = formData.get('message');
 
-    fetch('/', {
-        method: 'POST',
-        body: formData
-    })
-    .then(() => {
-        alert('Thank you for your message! I will get back to you soon.');
-        contactForm.reset();
-    })
-    .catch(err => alert('Error submitting the form: ' + err));
+    // رقمك على واتساب (بدّل الرقم هنا بالرقم الصحيح)
+    const whatsappNumber = '+201019747118'; // مثال: +20XXXXXXXXXX
+    const text = `Name: ${name}%0AEmail: ${email}%0APhone: ${phone}%0AMessage: ${message}`;
+    const whatsappURL = `https://wa.me/${whatsappNumber}?text=${text}`;
+
+    // فتح واتساب في تبويب جديد
+    window.open(whatsappURL, '_blank');
+
+    // إعادة ضبط الفورم
+    contactForm.reset();
+
+    // Optional: تنبيه للمستخدم
+    alert('Your message is ready on WhatsApp!');
 });
 
 // ===================================
